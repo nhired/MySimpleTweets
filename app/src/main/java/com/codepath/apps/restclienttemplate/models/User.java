@@ -23,7 +23,7 @@ public class User {
         //extract values
         user.name = json.getString("name");
         user.uid = json.getLong("id");
-        user.screenName = json.getString("screen_name");
+        user.screenName = "@" + json.getString("screen_name");
         user.proileImageUrl = json.getString("profile_image_url");
 
         return user;

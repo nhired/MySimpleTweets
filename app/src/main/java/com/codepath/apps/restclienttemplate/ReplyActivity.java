@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,24 +26,30 @@ import cz.msebera.android.httpclient.protocol.RequestUserAgent;
 
 import static com.codepath.apps.restclienttemplate.R.id.tweetId;
 
-//This class allows you to compose a tweet and send it back to your home activity
-
-public class ComposeActivity extends AppCompatActivity {
+//This page sets up the ability to reply to a tweet on your timeline
+public class ReplyActivity extends AppCompatActivity {
     TwitterClient tClient;
     EditText tweet;
+    Tweet replyTweet;
+    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compose);
+        setContentView(R.layout.activity_reply);
         tClient = TwitterApp.getRestClient(this);
         tweet = (EditText) findViewById(R.id.tweetId);
 
-    }
-    public void onComposeClick(View view) {
-        //uses the twitter client to send a tweet back to the main timeline
 
-        tClient.sendTweet(tweet.getText().toString(), new JsonHttpResponseHandler() {
+        replyTweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
+
+        id = replyTweet.uid;
+        tweet.setText(replyTweet.user.screenName);
+    }
+
+    public void onComposeClick(View view) {
+
+        tClient.replyToTweet(tweet.getText().toString(), id, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -55,16 +62,14 @@ public class ComposeActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(getApplicationContext(), "Send tweet error", Toast.LENGTH_SHORT).show();
+
             }
         });
 
     }
-
-
 
 }

@@ -17,18 +17,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
-        android:text="TextView" />
+        android:layout_marginRight="8dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:fontFamily="@font/biryani_extrabold"
+        android:text="TextView"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onBody"
         android:layout_below="@+id/tvUserName"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:fontFamily="@font/biryani"
+        android:onClick="loginToRest"
         android:text="TextView" />
 
     <TextView
@@ -37,5 +43,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:fontFamily="@font/biryani_light"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/screenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:fontFamily="@font/biryani_light"
+        android:text="TextView" />
+
+
 </RelativeLayout>
